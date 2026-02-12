@@ -1,7 +1,7 @@
 import sys #used to gives detail of the error occured(exc_info())
 from networksecurity.logging import logger
 
-class NetworkSecurityException():
+class NetworkSecurityException(Exception):  #Inherit from Exception so it is a valid Python exception
     def __init__(self,error_message,error_details:sys):
         self.error_message=error_message
         _, _, exc_tb = error_details.exc_info() #tb=traceback
@@ -9,7 +9,7 @@ class NetworkSecurityException():
         self.file_name = exc_tb.tb_frame.f_code.co_filename     
 
     def __str__(self):
-        return "Error occured in python script name [{0}] line number [{1}] error message[{2}]".format.self.file_name,self.lineno,str(self.error_message)
+        return "Error occured in python script name [{0}] line number [{1}] error message[{2}]".format(self.file_name,self.lineno,str(self.error_message))
     '''
     - __str__ is a special “magic” function in Python.
     - It tells Python: “When someone tries to turn this object into text (like with print()), here’s what I want to show.”
@@ -23,4 +23,3 @@ class NetworkSecurityException():
 #         print("This will not be printed",a)
 #     except Exception as e:
 #         raise NetworkSecurityException (e,sys) from e
-        
