@@ -13,12 +13,12 @@ def read_yaml_file(file_path:str)->dict: #func that takes a file_path and return
     
 def write_yaml_file(file_path:str,content:object,replace:bool=False)->dict:
     try:
-        if replace:
+        if replace: #if user wants to replace old file
             if os.path.exists(file_path):
                 os.remove(file_path)
             os.makedirs(os.path.dirname(file_path),exist_ok=True)
 
         with open(file_path,"w") as file:
-            yaml.dump(content,file)
+            yaml.dump(content,file) #open yaml and save into file using dump
     except Exception as e:
         raise NetworkSecurityException (e,sys) from e
